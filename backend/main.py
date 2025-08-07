@@ -6,7 +6,7 @@ from services.summarizer import get_summary
 # It's good practice to define metadata for your API documentation
 app = FastAPI(
     title="AI Devlog Summarizer",
-    description="An API to summarize text using a Hugging Face model.",
+    description="An API to summarize text using the Gemini API.",
     version="1.0.0",
 )
 
