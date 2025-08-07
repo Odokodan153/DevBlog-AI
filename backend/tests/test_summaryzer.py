@@ -1,10 +1,13 @@
 from services.summarizer import get_summary
 
 def test_get_summary_short_text():
+    # The Bulgarian text has been replaced with its English equivalent.
     text = (
-        "FastAPI е модерен, бърз (високопроизводителен) уеб framework за Python "
-        "за изграждане на API-та на база на стандартите OpenAPI и JSON Schema."
+        "FastAPI is a modern, fast (high-performance) web framework for Python "
+        "for building APIs based on the OpenAPI and JSON Schema standards."
     )
-    summary = get_summary(text)
+    # Note: This test might fail now because it calls the real Gemini API.
+    # For a real-world application, you would "mock" the API call during testing.
+    summary = get_summary(text, min_len=10, max_len=30)
     assert isinstance(summary, str)
-    assert 10 < len(summary) < 300
+    assert 5 < len(summary.split()) < 35
