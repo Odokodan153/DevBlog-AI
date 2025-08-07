@@ -1,44 +1,11 @@
+import React from 'react';
+import Summarizer from './components/Summarizer';
 
-import { useState } from "react";
-
-function App() {
-  const [entry, setEntry] = useState("");
-  const [summary, setSummary] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const submitEntry = async () => {
-    setLoading(true);
-    const res = await fetch("http://localhost:8000/summary", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: entry }),
-    });
-    const data = await res.json();
-    setSummary(data.summary);
-    setLoading(false);
-  };
-
+export default function App() {
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Devlog AI</h1>
-      <textarea
-        rows={8}
-        style={{ width: "100%", marginTop: 10 }}
-        value={entry}
-        onChange={(e) => setEntry(e.target.value)}
-        placeholder="Напиши тук какво си правил днес..."
-      />
-      <button onClick={submitEntry} disabled={loading || !entry}>
-        {loading ? "Генерира се..." : "Изпрати към AI"}
-      </button>
-      {summary && (
-        <div style={{ marginTop: 20 }}>
-          <strong>AI summary:</strong>
-          <p>{summary}</p>
-        </div>
-      )}
+    <div className="min-h-screen p-4 flex flex-col items-center justify-start">
+      <h1 className="text-2xl font-bold mb-4">DevBlog AI - Обобщаване на текст</h1>
+      <Summarizer />
     </div>
   );
 }
-
-export default App;
